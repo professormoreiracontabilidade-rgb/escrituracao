@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trilha de Aprendizagem - Escrituração e Partidas Dobradas</title>
+<style>
+:root{
+  --bg:#071a38;--card:#ffffff;--text:#102033;--muted:#607086;--blue:#123d7a;--blue2:#0a2854;--gold:#ffca28;--green:#13a85b;--red:#d62828;--pink:#ffe7ef;--soft:#eef5ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(160deg,#071a38,#0e3d7a);color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:stretch}
+.app{width:100%;max-width:430px;min-height:100vh;background:#f5f8ff;position:relative;overflow:hidden;box-shadow:0 0 28px #0006}
+.header{background:linear-gradient(135deg,#082656,#1557a8);color:white;padding:14px 16px 10px;border-bottom:5px solid var(--gold)}
+.header .course{font-weight:800;font-size:15px;letter-spacing:.2px}.header .title{font-size:20px;font-weight:900;margin-top:5px;line-height:1.15}.progress{height:9px;background:#ffffff45;border-radius:999px;margin-top:10px;overflow:hidden}.bar{height:100%;width:0;background:var(--gold);transition:.25s}
+.screen{display:none;padding:18px 16px 96px;animation:fade .2s ease}.screen.active{display:block}@keyframes fade{from{opacity:.2;transform:translateX(10px)}to{opacity:1;transform:none}}
+.card{background:white;border-radius:20px;padding:18px;box-shadow:0 8px 20px #0a285421;border:1px solid #dbe6ff}.cover{background:linear-gradient(180deg,#ffffff,#eaf3ff);border:3px solid #123d7a;text-align:center}.emoji{font-size:44px}.h1{font-size:29px;font-weight:900;color:#082656;line-height:1.05;margin:10px 0}.h2{font-size:24px;font-weight:900;color:#082656;line-height:1.1;margin:0 0 12px}.p{font-size:18px;line-height:1.45;margin:10px 0}.big{font-size:21px;font-weight:800}.tag{display:inline-block;background:#ffca28;color:#082656;font-weight:900;border-radius:999px;padding:6px 11px;margin:4px 2px;font-size:14px}.box{border-radius:16px;padding:14px;margin:12px 0;font-size:17px;line-height:1.35}.blue{background:#e8f1ff;border-left:7px solid #1557a8}.green{background:#e8fff1;border-left:7px solid #13a85b}.red{background:#fff0f0;border-left:7px solid #d62828}.yellow{background:#fff8dd;border-left:7px solid #ffca28}.pink{background:#ffeaf1;border-left:7px solid #d93672}.formula{font-family:Consolas,monospace;background:#091b36;color:#f8fbff;border-radius:14px;padding:14px;white-space:pre-wrap;line-height:1.35;font-size:16px;overflow:auto}.map{display:grid;gap:9px;margin:12px 0}.node{background:#fff;border:2px solid #1557a8;border-radius:16px;padding:12px;text-align:center;font-weight:900;font-size:17px}.arrow{text-align:center;font-size:24px;font-weight:900;color:#1557a8}.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{font-size:15px;padding:10px;border-radius:14px;background:#f0f6ff;border:1px solid #cfe0ff}.quiz .alt{width:100%;display:block;text-align:left;background:#f3f6fb;border:2px solid #ccd8ee;border-radius:14px;padding:12px;margin:9px 0;font-size:17px;font-weight:700;color:#102033}.quiz .alt.correct{background:#dff7e9;border-color:#13a85b}.quiz .alt.wrong{background:#ffe0e0;border-color:#d62828}.comment{display:none}.comment.show{display:block}.footer{position:absolute;left:0;right:0;bottom:0;background:white;border-top:1px solid #d8e3f5;padding:9px 12px 12px}.nav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}button{border:0;border-radius:14px;padding:12px 8px;font-weight:900;font-size:15px;cursor:pointer}.btn{background:#123d7a;color:white}.btn2{background:#ffca28;color:#082656}.btn3{background:#eef3fb;color:#082656;border:1px solid #cbd8ee}.smalltxt{text-align:center;font-size:12px;color:#50627b;margin-top:7px;font-weight:700}.input{width:100%;padding:15px;border:2px solid #b8c7df;border-radius:14px;font-size:18px;margin:10px 0}.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header"><div class="course">Curso de Contabilidade Professor Moreira</div><div class="title">Escrituração, Plano de Contas e Partidas Dobradas</div><div class="progress"><div class="bar" id="bar"></div></div></div>
+
+  <main id="slides"></main>
+
+  <div class="footer">
+    <div class="nav"><button class="btn3" onclick="prevSlide()">⬅️ Voltar</button><button class="btn2" onclick="home()">🏠 Início</button><button class="btn" onclick="nextSlide()">Próxima ➡️</button></div>
+    <div class="smalltxt" id="counter">Tela 1/35</div>
+  </div>
+</div>
+<script>
+const whatsapp = '5561985323574';
+const slides = [
+{type:'cover',html:`<div class="card cover"><div class="emoji">🚀</div><div class="h1">Trilha de Aprendizagem</div><p class="p big">Plano de Contas, Escrituração e Partidas Dobradas</p><div class="box yellow">Digite seu nome para começar a jornada.</div><input id="student" class="input" placeholder="Seu nome completo"><button class="btn" onclick="startCourse()">Começar agora</button><button class="btn3" style="margin-top:8px;width:100%" onclick="continueCourse()">Continuar de onde parei</button></div>`},
+{html:`<div class="card"><div class="h2">🎯 Objetivo da Aula</div><p class="p">Ao final desta trilha, o aluno deverá entender:</p><div class="map"><div class="node">Plano de Contas</div><div class="arrow">⬇️</div><div class="node">Escrituração</div><div class="arrow">⬇️</div><div class="node">Débito e Crédito</div><div class="arrow">⬇️</div><div class="node">Fatos Contábeis</div></div></div>`},
+{html:`<div class="card"><div class="h2">📚 Técnicas Contábeis</div><p class="p">A Contabilidade utiliza técnicas para registrar, organizar, conferir e interpretar os fatos da entidade.</p><div class="box blue">1️⃣ Escrituração<br>2️⃣ Demonstrações Contábeis<br>3️⃣ Auditoria<br>4️⃣ Análise de Balanços</div><div class="box yellow">Nesta trilha, o foco é a <b>escrituração contábil</b>.</div></div>`},
+{html:`<div class="card"><div class="h2">🧾 Escrituração</div><p class="p">Escrituração é o registro organizado dos fatos contábeis.</p><div class="box green"><b>Ideia simples:</b><br>tudo que altera o patrimônio precisa ser registrado de forma técnica.</div><div class="formula">Compra de mercadorias a prazo\nD – Estoques\nC – Fornecedores</div></div>`},
+{html:`<div class="card"><div class="h2">⚖️ ITG 2000</div><p class="p">A ITG 2000 orienta como a escrituração deve ser feita.</p><div class="box blue">✅ Idioma nacional<br>✅ Moeda nacional<br>✅ Forma contábil<br>✅ Ordem cronológica<br>✅ Sem rasuras<br>✅ Documento hábil</div></div>`},
+{html:`<div class="card"><div class="h2">🚨 Pegadinha de Prova</div><div class="box red">Errado dizer que a escrituração deve se basear <b>exclusivamente</b> em documentos externos.</div><div class="box green">A norma admite documentos de origem <b>externa ou interna</b>, ou elementos que comprovem o fato contábil.</div></div>`},
+{html:`<div class="card"><div class="h2">🏢 Plano de Contas</div><p class="p">É a lista organizada das contas usadas pela entidade.</p><div class="box yellow">Não existe um único plano de contas para todas as empresas.</div><p class="p">Ele depende do porte, ramo de atividade e necessidade dos usuários.</p></div>`},
+{html:`<div class="card"><div class="h2">💡 Exemplo Melhorado</div><p class="p">Uma multinacional de tecnologia terá plano de contas mais detalhado que uma pequena lanchonete.</p><div class="cols"><div class="mini"><b>Nexus Tech Log S/A</b><br>Softwares, frotas, filiais, estoques, contratos globais.</div><div class="mini"><b>Lanchonete Bom Sabor</b><br>Caixa, bancos, estoques, fornecedores e vendas.</div></div></div>`},
+{html:`<div class="card"><div class="h2">🧠 Composição do Plano</div><div class="map"><div class="node">Plano de Contas</div><div class="arrow">⬇️</div><div class="node">Elenco de Contas</div><div class="node">Manual de Contas</div><div class="node">Modelos de Demonstrações</div></div></div>`},
+{html:`<div class="card"><div class="h2">📌 Conta Contábil</div><p class="p">Conta é o nome técnico dado aos elementos patrimoniais e de resultado.</p><div class="box blue">Dinheiro → Caixa<br>Mercadorias → Estoques<br>Dívidas → Fornecedores<br>Vendas → Receita de Vendas</div></div>`},
+{html:`<div class="card"><div class="h2">⚖️ Partidas Dobradas</div><p class="p">Para todo débito existe crédito de mesmo valor.</p><div class="box green big">Débitos = Créditos</div><div class="formula">D – Caixa ................. 250.000\nC – Capital Social ........ 250.000</div></div>`},
+{html:`<div class="card"><div class="h2">👨‍🏫 Luca Pacioli</div><p class="p">O método das partidas dobradas foi difundido por Luca Pacioli e também é conhecido como método veneziano.</p><div class="box yellow">A lógica é simples: não existe aplicação de recurso sem origem correspondente.</div></div>`},
+{html:`<div class="card"><div class="h2">🔄 Débito e Crédito</div><p class="p">Na Contabilidade, débito e crédito não significam “bom” ou “ruim”.</p><div class="cols"><div class="mini"><b>Débito</b><br>Lado esquerdo do razonete.</div><div class="mini"><b>Crédito</b><br>Lado direito do razonete.</div></div><div class="formula">        CONTA\nDébito  |  Crédito</div></div>`},
+{html:`<div class="card"><div class="h2">🧠 Macete das Naturezas</div><div class="box green"><b>A + D = Débito</b><br>Ativo e Despesa possuem natureza devedora.</div><div class="box blue"><b>P + PL + R = Crédito</b><br>Passivo, Patrimônio Líquido e Receita possuem natureza credora.</div></div>`},
+{html:`<div class="card"><div class="h2">📈 Como as Contas Aumentam?</div><div class="cols"><div class="mini"><b>Ativo</b><br>Aumenta no Débito<br>Diminui no Crédito</div><div class="mini"><b>Passivo</b><br>Aumenta no Crédito<br>Diminui no Débito</div><div class="mini"><b>Despesa</b><br>Aumenta no Débito</div><div class="mini"><b>Receita</b><br>Aumenta no Crédito</div></div></div>`},
+{html:`<div class="card"><div class="h2">💰 Exemplo 1</div><p class="p">Constituição da empresa Alpha Tecnologia com capital integralizado em dinheiro de R$ 500.000.</p><div class="formula">D – Caixa ......................... 500.000\nC – Capital Social ................ 500.000</div><div class="box yellow">Caixa aumenta no débito. Capital Social aumenta no crédito.</div></div>`},
+{html:`<div class="card"><div class="h2">📦 Exemplo 2</div><p class="p">Compra de mercadorias a prazo no valor de R$ 120.000.</p><div class="formula">D – Estoques ...................... 120.000\nC – Fornecedores .................. 120.000</div><div class="box green">Entrou estoque e nasceu uma obrigação.</div></div>`},
+{html:`<div class="card"><div class="h2">🚚 Exemplo 3</div><p class="p">Compra de caminhão por R$ 180.000, sendo 40% à vista e 60% financiado.</p><div class="formula">D – Veículos ...................... 180.000\nC – Caixa .........................  72.000\nC – Financiamentos a Pagar ........ 108.000</div></div>`},
+{html:`<div class="card"><div class="h2">🧾 Exemplo 4</div><p class="p">Prestação de serviços por R$ 90.000: R$ 35.000 à vista e R$ 55.000 a prazo.</p><div class="formula">D – Caixa ......................... 35.000\nD – Clientes ...................... 55.000\nC – Receita de Serviços ........... 90.000</div></div>`},
+{html:`<div class="card"><div class="h2">🔢 Fórmulas de Lançamento</div><div class="map"><div class="node">1ª fórmula: 1D e 1C</div><div class="node">2ª fórmula: 1D e 2 ou + C</div><div class="node">3ª fórmula: 2 ou + D e 1C</div><div class="node">4ª fórmula: 2 ou + D e 2 ou + C</div></div><div class="box yellow big">Macete: 11, 12, 21, 22</div></div>`},
+{html:`<div class="card"><div class="h2">1️⃣ Primeira Fórmula</div><p class="p">Um débito e um crédito.</p><div class="formula">Compra de estoque a prazo: R$ 48.000\n\nD – Estoques ....................... 48.000\nC – Fornecedores ................... 48.000</div></div>`},
+{html:`<div class="card"><div class="h2">2️⃣ Segunda Fórmula</div><p class="p">Um débito e dois ou mais créditos.</p><div class="formula">Compra de máquinas: R$ 300.000\nEntrada: 100.000 | Financiado: 200.000\n\nD – Máquinas ...................... 300.000\nC – Bancos ........................ 100.000\nC – Financiamentos ................ 200.000</div></div>`},
+{html:`<div class="card"><div class="h2">3️⃣ Terceira Fórmula</div><p class="p">Dois ou mais débitos e um crédito.</p><div class="formula">Venda de serviços: R$ 75.000\nRecebeu 25.000 e o restante a prazo\n\nD – Caixa ......................... 25.000\nD – Clientes ...................... 50.000\nC – Receita de Serviços ........... 75.000</div></div>`},
+{html:`<div class="card"><div class="h2">4️⃣ Quarta Fórmula</div><p class="p">Dois ou mais débitos e dois ou mais créditos.</p><div class="formula">Compra total: R$ 60.000\n30.000 mercadorias + 30.000 material consumo\nPagamento: 20.000 à vista e 40.000 a prazo\n\nD – Mercadorias ................... 30.000\nD – Material de Consumo ........... 30.000\nC – Caixa ......................... 20.000\nC – Fornecedores .................. 40.000</div></div>`},
+{html:`<div class="card"><div class="h2">📊 Fatos Contábeis</div><p class="p">Os fatos contábeis são classificados pelo efeito sobre o Patrimônio Líquido.</p><div class="map"><div class="node">Permutativo</div><div class="node">Modificativo</div><div class="node">Misto</div></div></div>`},
+{html:`<div class="card"><div class="h2">🔁 Fato Permutativo</div><p class="p">Troca elementos do patrimônio, mas não altera o Patrimônio Líquido.</p><div class="formula">Compra de veículo à vista: R$ 95.000\n\nD – Veículos ...................... 95.000\nC – Bancos ........................ 95.000</div><div class="box green">Mudou a composição do ativo, mas o PL não mudou.</div></div>`},
+{html:`<div class="card"><div class="h2">📈 Modificativo Aumentativo</div><p class="p">Aumenta o Patrimônio Líquido por meio de receita.</p><div class="formula">Receita de juros recebida: R$ 4.800\n\nD – Bancos ........................ 4.800\nC – Receita de Juros .............. 4.800</div></div>`},
+{html:`<div class="card"><div class="h2">📉 Modificativo Diminutivo</div><p class="p">Diminui o Patrimônio Líquido por meio de despesa.</p><div class="formula">Salários do mês: R$ 82.000\n\nD – Despesa de Salários ........... 82.000\nC – Salários a Pagar .............. 82.000</div></div>`},
+{html:`<div class="card"><div class="h2">🧩 Fato Misto Aumentativo</div><p class="p">Há permuta patrimonial e também aumento do PL.</p><div class="formula">Dívida de R$ 40.000 paga com desconto de R$ 3.000\n\nD – Fornecedores .................. 40.000\nC – Bancos ........................ 37.000\nC – Descontos Obtidos .............  3.000</div></div>`},
+{html:`<div class="card"><div class="h2">🧩 Fato Misto Diminutivo</div><p class="p">Há permuta patrimonial e também redução do PL.</p><div class="formula">Dívida de R$ 50.000 paga com multa de R$ 2.500\n\nD – Fornecedores .................. 50.000\nD – Despesa com Multas ............  2.500\nC – Bancos ........................ 52.500</div></div>`},
+{html:`<div class="card"><div class="h2">🛠️ Retificação</div><p class="p">Erro na escrituração não se corrige com rasura. Corrige-se tecnicamente.</p><div class="map"><div class="node">Estorno</div><div class="node">Transferência</div><div class="node">Complementação</div></div></div>`},
+{html:`<div class="card"><div class="h2">↩️ Estorno</div><p class="p">É o lançamento inverso para anular totalmente um lançamento errado.</p><div class="formula">Erro: compra a prazo registrada como à vista\nD – Equipamentos 80.000\nC – Caixa 80.000\n\nEstorno:\nD – Caixa 80.000\nC – Equipamentos 80.000</div></div>`},
+{html:`<div class="card"><div class="h2">🔄 Transferência</div><p class="p">Serve para levar o valor da conta errada para a conta correta.</p><div class="formula">Correção do erro anterior:\n\nD – Caixa ........................ 80.000\nC – Fornecedores ................. 80.000</div><div class="box yellow">A conta correta era Fornecedores, não Caixa.</div></div>`},
+{html:`<div class="card"><div class="h2">➕ Complementação</div><p class="p">Serve para ajustar valor registrado a menor ou a maior.</p><div class="formula">Compra real: R$ 34.000\nRegistrada por: R$ 29.000\nDiferença: R$ 5.000\n\nD – Estoques ...................... 5.000\nC – Caixa ......................... 5.000</div></div>`},
+{html:`<div class="card"><div class="h2">⚡ Superveniências e Insubsistências</div><div class="box green"><b>Superveniência Ativa</b><br>Surge um ativo → Receita</div><div class="box red"><b>Superveniência Passiva</b><br>Surge um passivo → Despesa</div><div class="box green"><b>Insubsistência do Passivo</b><br>Some uma obrigação → Receita</div><div class="box red"><b>Insubsistência do Ativo</b><br>Some um ativo → Despesa</div></div>`},
+{html:`<div class="card quiz"><div class="h2">✅ Quiz 1</div><p class="p big">A escrituração deve ser feita:</p><button class="alt" onclick="answer(this,false)">A) Apenas com documentos externos</button><button class="alt" onclick="answer(this,true)">B) Em idioma e moeda nacionais</button><button class="alt" onclick="answer(this,false)">C) Sem ordem cronológica</button><button class="alt" onclick="answer(this,false)">D) Com rasuras quando necessário</button><div class="comment box green">Comentário: a escrituração deve observar idioma nacional, moeda nacional, forma contábil, ordem cronológica e ausência de rasuras.</div></div>`},
+{html:`<div class="card quiz"><div class="h2">✅ Quiz 2</div><p class="p big">Compra de mercadorias a prazo gera:</p><button class="alt" onclick="answer(this,true)">A) Débito em Estoques e crédito em Fornecedores</button><button class="alt" onclick="answer(this,false)">B) Débito em Fornecedores e crédito em Estoques</button><button class="alt" onclick="answer(this,false)">C) Débito em Receita e crédito em Caixa</button><button class="alt" onclick="answer(this,false)">D) Débito em Despesa e crédito em Capital</button><div class="comment box green">Comentário: entrou mercadoria no ativo e nasceu obrigação no passivo.</div></div>`},
+{html:`<div class="card quiz"><div class="h2">✅ Quiz 3</div><p class="p big">Um lançamento com 2 débitos e 1 crédito é:</p><button class="alt" onclick="answer(this,false)">A) 1ª fórmula</button><button class="alt" onclick="answer(this,false)">B) 2ª fórmula</button><button class="alt" onclick="answer(this,true)">C) 3ª fórmula</button><button class="alt" onclick="answer(this,false)">D) 4ª fórmula</button><div class="comment box green">Comentário: 3ª fórmula = dois ou mais débitos e um crédito. Macete: 21.</div></div>`},
+{html:`<div class="card quiz"><div class="h2">✅ Quiz 4</div><p class="p big">Compra de veículo à vista é fato:</p><button class="alt" onclick="answer(this,true)">A) Permutativo</button><button class="alt" onclick="answer(this,false)">B) Modificativo aumentativo</button><button class="alt" onclick="answer(this,false)">C) Modificativo diminutivo</button><button class="alt" onclick="answer(this,false)">D) Misto diminutivo</button><div class="comment box green">Comentário: troca Caixa por Veículos, sem alterar o PL.</div></div>`},
+{html:`<div class="card"><div class="emoji">🏆</div><div class="h1">Parabéns!</div><p class="p big">Você concluiu a trilha de Escrituração e Partidas Dobradas.</p><div class="box yellow">Agora revise os macetes: <br><b>Débitos = Créditos</b><br><b>11, 12, 21, 22</b><br><b>Permutativo não altera PL</b></div><button class="btn" style="width:100%" onclick="sendConclusion()">📤 Enviar conclusão ao professor</button><button class="btn3" style="width:100%;margin-top:8px" onclick="restart()">🔄 Estudar novamente</button></div>`}
+];
+let current = Number(localStorage.getItem('trilha_escrituracao_slide')||0);
+function render(){
+  const root=document.getElementById('slides');
+  root.innerHTML=slides.map((s,i)=>`<section class="screen ${i===current?'active':''}">${s.html}</section>`).join('');
+  update();
+}
+function update(){
+  document.querySelectorAll('.screen').forEach((el,i)=>el.classList.toggle('active',i===current));
+  document.getElementById('counter').textContent=`Tela ${current+1}/${slides.length}`;
+  document.getElementById('bar').style.width=((current+1)/slides.length*100)+'%';
+  localStorage.setItem('trilha_escrituracao_slide',current);
+}
+function nextSlide(){ if(current<slides.length-1){current++; update();} }
+function prevSlide(){ if(current>0){current--; update();} }
+function home(){ current=0; update(); }
+function restart(){ localStorage.removeItem('trilha_escrituracao_slide'); current=0; render(); }
+function startCourse(){
+ const nome=document.getElementById('student')?.value.trim()||'Aluno';
+ localStorage.setItem('trilha_escrituracao_nome',nome);
+ current=1; update();
+}
+function continueCourse(){ current=Number(localStorage.getItem('trilha_escrituracao_slide')||1); update(); }
+function answer(btn,ok){
+ const box=btn.closest('.quiz');
+ box.querySelectorAll('.alt').forEach(b=>b.disabled=true);
+ if(ok){btn.classList.add('correct')}else{btn.classList.add('wrong'); const alts=[...box.querySelectorAll('.alt')]; const correct=alts.find(a=>a.getAttribute('onclick').includes('true')); if(correct) correct.classList.add('correct');}
+ box.querySelector('.comment').classList.add('show');
+}
+function sendConclusion(){
+ const nome=localStorage.getItem('trilha_escrituracao_nome')||'Aluno';
+ const msg=encodeURIComponent(`Professor Moreira, eu (${nome}) concluí a trilha de Escrituração, Plano de Contas e Partidas Dobradas.`);
+ window.open(`https://wa.me/${whatsapp}?text=${msg}`,'_blank');
+}
+render();
+</script>
+</body>
+</html>
